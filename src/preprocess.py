@@ -2,6 +2,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import ast
+import pickle
 
 
 def convert(text):
@@ -91,7 +92,6 @@ vectors = cv.fit_transform(new_df['tags']).toarray()
 similarity = cosine_similarity(vectors)
 
 print("Similarity matrix shape:", similarity.shape)
-
 def recommend(movie):
     
     movie_index = new_df[new_df['title'] == movie].index[0]
@@ -104,3 +104,6 @@ def recommend(movie):
         print(new_df.iloc[i[0]].title)
 
 recommend("Avatar")
+
+pickle.dump(new_df, open('movies.pkl','wb'))
+pickle.dump(similarity, open('similarity.pkl','wb'))
