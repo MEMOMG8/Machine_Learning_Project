@@ -22,17 +22,19 @@ def load_data():
 def fetch_poster(movie_id):
     try:
         api_key = st.secrets["TMDB_API_KEY"]
+
         url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=en-US"
 
         response = requests.get(url, timeout=10)
+        response.raise_for_status()
+
         data = response.json()
 
-        st.write("Testing movie_id:", movie_id)
-        st.write("TMDB response:", data)
-
         poster_path = data.get("poster_path")
+
         if poster_path:
             return "https://image.tmdb.org/t/p/w500" + poster_path
+
         return None
 
     except Exception as e:
