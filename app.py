@@ -6,12 +6,15 @@ import requests
 movies = pickle.load(open('movies.pkl','rb'))
 similarity = pickle.load(open('similarity.pkl','rb'))
 
+st.set_page_config(page_title="Movie Recommender", layout="wide")
+
 st.subheader("Find movies similar to your favorites using Machine Learning")
 
 def fetch_poster(movie_id):
 
-    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=6b9c27cb7eb5e71c51aba688147911b5&language=en-US"
-
+    api_key = st.secrets["TMDB_API_KEY"]
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=en-US"
+    
     data = requests.get(url)
     data = data.json()
 
