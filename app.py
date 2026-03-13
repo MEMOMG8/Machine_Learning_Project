@@ -7,7 +7,7 @@ movies = pickle.load(open('movies.pkl','rb'))
 similarity = pickle.load(open('similarity.pkl','rb'))
 
 st.set_page_config(page_title="Movie Recommender", layout="wide")
-
+st.title("Movie Recommender System")
 st.subheader("Find movies similar to your favorites using Machine Learning")
 
 def fetch_poster(movie_id):
